@@ -6,7 +6,7 @@ Download the following:
 
 OR Download the plugin now:
 
-[RPG-Server.jar](https://www.dropbox.com/s/94ceeyb74hex29k/RPG-Plugin.jar?dl=0) (But you still need the UberItems plugin.)
+[RPG-Server.jar](https://www.dropbox.com/s/94ceeyb74hex29k/RPG-Plugin.jar?dl=1) (But you still need the UberItems plugin.)
 
 ## Updates
 - Added Bishop Armor that gives strength 2 when left-clicked.
