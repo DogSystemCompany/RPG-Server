@@ -1,0 +1,2 @@
+on load:
+    register new shapeless recipe for iron ingot named "&fIron Plate" with lore "&f&lCOMMON" using iron chain, iron ingot, air, air, air, air, air, air, air

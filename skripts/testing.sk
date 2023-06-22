@@ -1,0 +1,3 @@
+command /setnormalhp:
+    trigger:
+        set player's max health to 10

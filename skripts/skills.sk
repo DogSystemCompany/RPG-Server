@@ -1,0 +1,174 @@
+# Commands:
+
+command /resetskills:
+    permission: op
+    aliases: /rs
+    trigger:
+        execute console command "effect clear @s"
+        set {farming::%player%} to 0
+        set {strength::%player%} to 0
+        set {magic::%player%} to 0
+        set {mining::%player%} to 0
+        set {chopping::%player%} to 0
+        set {enchanting::%player%} to 0
+        set {blocksMined::%player%} to 0
+        set {farmingMined::%player%} to 0
+
+command /menu:
+    aliases: /skills, /stats
+    trigger:
+        wait 1 tick
+        open chest with 3 rows named "Menu" to player
+        wait 1 tick
+        if {mining::%player%} = 0:
+            format slot 1 of player with shiny diamond pickaxe named "&8Mining 0" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        else:
+            format slot 1 of player with shiny diamond pickaxe named "&8Mining %roman numeral of {mining::%player%}%" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        if {farming::%player%} = 0:
+            format slot 2 of player with shiny golden hoe named "§6Farming 0" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        else:
+            format slot 2 of player with shiny golden hoe named "§6Farming %roman numeral of {farming::%player%}%" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        if {magic::%player%} = 0:
+            format slot 3 of player with shiny end crystal named "&5Magic 0" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        else:
+            format slot 3 of player with shiny end crystal named "&5Magic %roman numeral of {magic::%player%}%" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        if {strength::%player%} = 0:
+            format slot 4 of player with shiny netherite sword named "&cStrength 0" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        else:
+            format slot 4 of player with shiny netherite sword named "&cStrength %roman numeral of {strength::%player%}%" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        if {chopping::%player%} = 0:
+            format slot 5 of player with shiny stone axe named "&4Chopping 0" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        else:
+            format slot 5 of player with shiny stone axe named "&4Chopping %roman numeral of {chopping::%player%}%" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        if {enchanting::%player%} = 0:
+            format slot 6 of player with shiny enchanting table named "&9Enchanting 0" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        else:
+            format slot 6 of player with shiny enchanting table named "&9Enchanting %roman numeral of {enchanting::%player%}%" with lore "" and "&7Rewards:" with lore "&eWARNING: &8(This feature is not added and is still being developed...)" to close
+        format slot 10 of player with shiny stone named "&8Blocks Mined" with lore "" and "&Mined:" with lore "" and "%{blocksMined::%player%}%" to close
+        format slot 11 of player with shiny wheat named "§6Crops Farmed" with lore "" and "&Farmed:" with lore "" and "%{farmingMined::%player%}%" to close
+        format slot 22 of player with shiny barrier named "&cClose" with lore "" and "&7Rewards:" with lore "Click this to close this window." to close
+
+# Skills:
+
+variables:
+    {farming::%player%} = 0
+    {strength::%player%} = 0
+    {magic::%player%} = 0
+    {mining::%player%} = 0
+    {chopping::%player%} = 0
+    {enchanting::%player%} = 0
+    {blocksMined::%player%} = 0
+    {farmingMined::%player%} = 0
+
+on break:
+    if event-block is stone:
+        add 1 to {blocksMined::%player%}
+        miningLevelUp(player)
+    if event-block is coal ore:
+        add 5 to {blocksMined::%player%}
+        miningLevelUp(player)
+    if event-block is iron ore:
+        add 10 to {blocksMined::%player%}
+        miningLevelUp(player)
+    if event-block is gold ore:
+        add 15 to {blocksMined::%player%}
+        miningLevelUp(player)
+    if event-block is diamond ore:
+        add 30 to {blocksMined::%player%}
+        miningLevelUp(player)
+    if event-block is emerald ore:
+        add 30 to {blocksMined::%player%}
+    if event-block is redstone ore:
+        add 15 to {blocksMined::%player%}
+        miningLevelUp(player)
+    if event-block is wheat:
+        if {farming::%player%} = 0:
+            add 5 to {farmingMined::%player%}
+            farmingLevelUp(player)
+        if {farming::%player%} = 1:
+            add 10 to {farmingMined::%player%}
+            farmingLevelUp(player)
+    if event-block is carrot:
+        if {farming::%player%} = 0:
+            add 5 to {farmingMined::%player%}
+            farmingLevelUp(player)
+        if {farming::%player%} = 1:
+            add 10 to {farmingMined::%player%}
+            farmingLevelUp(player)
+    if event-block is potato:
+        if {farming::%player%} = 0:
+            add 5 to {farmingMined::%player%}
+            farmingLevelUp(player)
+        if {farming::%player%} = 1:
+            add 10 to {farmingMined::%player%}
+            farmingLevelUp(player)
+
+function farmingLevelUp(p: player):
+    # Farming level 1
+    if {farming::%{_p}%} = 0:
+        if {farmingMined::%{_p}%} = 50:
+            send "&3-----------------------" to {_p}
+            send "&b&lSKILL UP &r&3Farming &7%{farming::%{_p}%}% > &3%{farming::%{_p}%}+1%" to {_p}
+            send "" to {_p}
+            send "&eREWARDS" to {_p}
+            send "&a- 2x Farming Production" to {_p}
+            send "&3-----------------------" to {_p}
+            add 1 to {farming::%{_p}%}
+        if {farming::%{_p}%} > 50:
+            send "&3-----------------------" to {_p}
+            send "&b&lSKILL UP &r&3Farming &7%{farming::%{_p}%}% > &3%{farming::%{_p}%}+1%" to {_p}
+            send "" to {_p}
+            send "&eREWARDS" to {_p}
+            send "&a- 2x Farming Production" to {_p}
+            send "&3-----------------------" to {_p}
+            add 1 to {farming::%{_p}%}
+
+
+function miningLevelUp(p: player):
+    # Mining level 1
+    if {mining::%{_p}%} = 0:
+        if {blocksMined::%{_p}%} = 50:
+            send "&3-----------------------" to {_p}
+            send "&b&lSKILL UP &r&3Mining &7%{mining::%{_p}%}% > &3%{mining::%{_p}%}+1%" to {_p}
+            send "" to {_p}
+            send "&eREWARDS" to {_p}
+            send "&a- Haste 3" to {_p}
+            send "&3-----------------------" to {_p}
+            add 1 to {mining::%{_p}%}
+            execute console command "effect clear %{_p}%"
+            execute console command "effect give %{_p}% haste infinite 2 true"
+        if {blocksMined::%{_p}%} > 50:
+            send "&3-----------------------" to {_p}
+            send "&b&lSKILL UP &r&3Mining &7%{mining::%{_p}%}% > &3%{mining::%{_p}%}+1%" to {_p}
+            send "" to {_p}
+            send "&eREWARDS" to {_p}
+            send "&a- Haste 3" to {_p}
+            send "&3-----------------------" to {_p}
+            add 1 to {mining::%{_p}%}
+            execute console command "effect clear %{_p}%"
+            execute console command "effect give %{_p}% haste infinite 2 true"
+    
+    # Mining level 2
+    if {mining::%{_p}%} = 1:
+        if {blocksMined::%{_p}%} = 100:
+            send "&3-----------------------" to {_p}
+            send "&b&lSKILL UP &r&3Mining &7%{mining::%{_p}%}% > &3%{mining::%{_p}%}+1%" to {_p}
+            send "" to {_p}
+            send "&eREWARDS" to {_p}
+            send "&a- Haste 4" to {_p}
+            send "&a- Access to the &5Deep mines." to {_p}
+            send "&3-----------------------" to {_p}
+            add 1 to {mining::%{_p}%}
+            execute console command "effect clear %{_p}%"
+            execute console command "effect give %{_p}% haste infinite 3 true"
+        if {blocksMined::%{_p}%} > 100:
+            send "&3-----------------------" to {_p}
+            send "&b&lSKILL UP &r&3Mining &7%{mining::%{_p}%}% > &3%{mining::%{_p}%}+1%" to {_p}
+            send "" to {_p}
+            send "&eREWARDS" to {_p}
+            send "&a- Haste 4" to {_p}
+            send "&a- Access to the &5Deep mines." to {_p}
+            send "&3-----------------------" to {_p}
+            add 1 to {mining::%{_p}%}
+            execute console command "effect clear %{_p}%"
+            execute console command "effect give %{_p}% haste infinite 4 true"

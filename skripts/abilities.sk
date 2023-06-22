@@ -1,0 +1,18 @@
+variables:
+    {hp::%player%} = 10
+    {hpAdded::%player%} = 0
+
+on click:
+    if player's tool is bow:
+        if uncolored name of player's tool is "AK-47":
+            cancel event 
+            loop 10 times:
+                wait 1 tick
+                shoot an arrow
+            wait 10 tick
+            execute console command "minecraft:kill @e[type=minecraft:arrow]"
+
+command /resethpadded:
+    trigger:
+        set {hpAdded::%player%} to 0
+        set player's max health to 10

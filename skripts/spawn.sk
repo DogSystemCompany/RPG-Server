@@ -1,0 +1,15 @@
+on join:
+    execute console command "/warp hub %player%"
+
+on world change:
+    set {player.name} to player's name
+    if player is in world "world_the_end":
+        execute player command "/is home"
+    else:
+        stop
+    if {player.name} is equal to {player.world}:
+        stop
+    else if {player.world} is equal to "world":
+        stop
+    else:
+        kick player due to "&8[&4Error:&8] &cBugged/Glitched, you idiot, stop trying to do that."

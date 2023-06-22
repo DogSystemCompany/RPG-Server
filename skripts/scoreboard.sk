@@ -1,0 +1,15 @@
+# skRayFall
+
+options:
+    server: &l&bThe Deepest Dark
+
+every 1 second:
+    loop all players:
+        set {_online} to number of all players
+        wipe loop-player's sidebar
+        set name of sidebar of loop-player to "{@server}"
+        set score "&7&m-----------------------" in sidebar of loop-player to 5
+        set score "  &6&lCASH: 10" in sidebar of loop-player to 4
+        set score "  &2&lMAGIC POWER: 0" in sidebar of loop-player to 3
+        set score "  &3&lPLAYERS ONLINE: %{_online}%" in sidebar of loop-player to 2
+        set score "&7&m-----------------------" in sidebar of loop-player to 1
