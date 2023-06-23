@@ -14,3 +14,7 @@ OR Download the plugin now:
 - Added Bishop Armor that gives strength 2 when left-clicked.
 - Added Enchanted Iron Ingot (Not on GitHub...)
 - Crafting recipes added for the following items. (Not on GitHub... And also requires CEH plugin)
+### 2.0 Beta
+- Patch infinite strength and heart glitch.
+- Added extra ability of hearts on Bishop Armor.
+- Releasing MC Server Alpha
